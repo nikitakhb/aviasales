@@ -1,0 +1,8 @@
+export PYTHONPATH=${PYTHONPATH}:${PROJECT_ROOT}
+
+python "${PROJECT_ROOT}"/case/manage.py collectstatic --noinput
+python "${PROJECT_ROOT}"/case/manage.py migrate --noinput
+
+cores=$(grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}')
+workers=$(((2 * cores) + 1))
+cd case && gunicorn case.wsgi --bind 0.0.0.0:8000 --workers $workers

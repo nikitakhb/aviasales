@@ -1,0 +1,10 @@
+.pytest_cache/
+.idea/
+.vscode/
+/static/dist
+static/node_modules
+logs
+*.log
+.cache/
+.pytest_cache
+__pycache__/
